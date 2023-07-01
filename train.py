@@ -2,6 +2,7 @@ import argparse
 import torch
 import torch.nn as nn
 import dataloader
+import os
 from trainer import Trainer
 from model import MLPModel, EncoderModel
 from dataloader import CustomDataset
@@ -30,15 +31,20 @@ if __name__ == '__main__':
 
     config = p.parse_args()
 
+    if not os.path.exists(config.savepath):
+        os.makedirs(config.savepath)
+    if not os.path.exists(config.savepath_best):
+        os.makedirs(config.savepath_best)
+
     if config.model_type == 'MLP':
-        model = MLPModel(train_dataset.get_input_size,
+        model = MLPModel(train_dataset.get_input_size(),
                          config.hidden_size,
-                         train_dataset.get_output_size,
+                         train_dataset.get_output_size(),
                          config.nlayers)
     elif config.model_type == 'Encoder':
-        model = EncoderModel(train_dataset.get_input_size,
+        model = EncoderModel(train_dataset.get_input_size(),
                              config.hidden_size,
-                             train_dataset.get_output_size,
+                             train_dataset.get_output_size(),
                              config.nlayers,
                              config.nheads)
     else:

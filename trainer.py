@@ -55,9 +55,9 @@ class Trainer:
         epoch = 0
 
         if config.load_path is not None:
-            checkpoint = torch.load(load_path)
+            checkpoint = torch.load(config.load_path)
             self.model.load_state_dict(checkpoint['model'])
-            self.optimizer.load_state_dict(check['optimizer'])
+            self.optimizer.load_state_dict(checkpoint['optimizer'])
             epoch = checkpoint['epoch']
 
         while epoch < config.n_epochs:

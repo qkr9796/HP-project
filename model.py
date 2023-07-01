@@ -15,7 +15,7 @@ class MLPModel(nn.Module):
         x = self.embedding(x)
         for layer in self.linears:
             x = layer(x)
-            x = F.ReLU(x)
+            x = F.relu(x)
 
         x = self.output(x)
         x = F.sigmoid(x)
@@ -23,7 +23,7 @@ class MLPModel(nn.Module):
         return x
 
 
-class EncoderModel(nn.Moduel):
+class EncoderModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, n_layers, n_head):
         super(EncoderModel, self).__init__()
 
