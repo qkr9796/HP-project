@@ -39,9 +39,9 @@ class EncoderModel(nn.Module):
     def forward(self, x):
         x = x.unsqueeze(dim=-1)
         x = self.embedding(x)
-        x = self.net(x)
+        x = self.encoder(x)
 
-        x = x.view(x.shpae(0), -1)
+        x = x.view(x.shape[0], -1)
 
         x = self.output(x)
         x = F.sigmoid(x)

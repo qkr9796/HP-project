@@ -50,16 +50,17 @@ if __name__ == '__main__':
     else:
         raise Exception('model_type not defined')
 
+    model = model.to(config.device)
     optimizer = torch.optim.Adam(model.parameters())
-    criterion = nn.BCELoss()
+    criterion = nn.MSELoss(reduction='None')
 
     train_dataloader = dataloader.create_dataloader(train_dataset,
                                                     batch_size=config.batch_size, shuffle=True)
     valid_dataloader = dataloader.create_dataloader(valid_dataset,
                                                     batch_size=config.batch_size, shuffle=True)
 
-    trainer = Trainer(model, optimizer, criterion)
-    trainer.train(train_dataloader, valid_dataloader, config)
+    trainer = Trainer(model, optimizer, criterion, config)
+    trainer.train(train_dataloader, valid_dataloader)
 
 
 
