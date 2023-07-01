@@ -39,7 +39,7 @@ class Trainer:
         total_loss = 0
 
         with torch.no_grad():
-            for valid_x, valid_y in train_datalodaer:
+            for valid_x, valid_y in valid_dataloader:
 
                 label_pred = self.model(valid_x)
 
